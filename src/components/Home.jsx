@@ -50,7 +50,7 @@ export const Home = () => {
 
                 <div className='-top-[280px] relative sm:relative sm:-top-[280px] md:relative md:w-[80vw] lg:top-0 grow gap-[17px] z-2 ml-[0px] flex flex-col justify-start'>
                     <div className={test}>
-                        <p className='font-bold'>Open call for pilot access to Helmi quantun computer now open!</p>
+                        <p className='font-bold'>Open call for pilot access to Helmi quantum computer now open!</p>
                         <a href='' className='w-fit flex text-cyan-600 hover:underline' >How to access Helmi, instructions <CIcon path={mdiArrowRight}/> </a>
                     </div>
                     <div className='flex flex-col sm:flex-row sm:flex-wrap md:flex-row md:flex-wrap md:ml-0 sm:ml-0 lg:flex-row lg:flex-wrap lg:ml-[20px] xl:ml-[20px] xl:flex xl:flex-col '>
