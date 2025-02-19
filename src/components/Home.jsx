@@ -10,8 +10,8 @@ const style = {
     "--_c-icon-color": "white"
 };
 
-const ContentButton = ({ text, href }) => {
-    const isActive = window.location.pathname === href;
+const ContentButton = props => {
+    const isActive = window.location.pathname === props.href;
 
     var styleClass = "text-white text-md py-3"
     if (isActive) {
@@ -23,9 +23,9 @@ const ContentButton = ({ text, href }) => {
                 className='w-min ml-[20px] mt-[10px] md:ml-0 md:mr-[20px] sm:ml-0 sm:ml-[30px]'
                 no-radius
                 style={style}
-                onClick={() => (window.location.href = href)}
+                onClick={() => (window.location.href = props.href)}
             >
-                <p className={styleClass}>{text}</p>
+                <p className={styleClass}>{props.title}</p>
                 <CIcon path={mdiArrowRight}/>
             </CButton>
     );
@@ -34,6 +34,14 @@ const ContentButton = ({ text, href }) => {
 export const Home = () => {
     const test_lg = 500;
     const test = 'flex flex-col justify-evenly z-2 bg-orange-200 min-h-[100px] pl-[30px]'
+    const nav = SITE.constants.nav
+    const contentButtons = [
+        "Get started",
+        "Blogs and instructions",
+        "About"
+    ].map(title => nav.find(page => page.title === title))
+     .map(page => <ContentButton {...page} />)
+
     return (
         <div className='min-w-[375px] h-auto xl:h-[850px] 2xl:h-[950px]'>
             <div className='bg-cyan-800 w-full min-h-[400px]'></div>
@@ -54,9 +62,7 @@ export const Home = () => {
                         <a href='' className='w-fit flex text-cyan-600 hover:underline' >How to access Helmi, instructions <CIcon path={mdiArrowRight}/> </a>
                     </div>
                     <div className='flex flex-col sm:flex-row sm:flex-wrap md:flex-row md:flex-wrap md:ml-0 sm:ml-0 lg:flex-row lg:flex-wrap lg:ml-[20px] xl:ml-[20px] xl:flex xl:flex-col '>
-                        <ContentButton text="Get Started" href="/"/>
-                        <ContentButton text="Posts and publications" href="/pages/publications.html"/>
-                        <ContentButton text="About FiQCI" href="/pages/about.html"/>
+                        { contentButtons }
                     </div>
                 </div>
             </div>

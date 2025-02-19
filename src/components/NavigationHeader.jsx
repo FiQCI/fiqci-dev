@@ -11,8 +11,8 @@ const style = {
     "--_c-icon-color": "black"
 };
 
-const NavButton = ({ text, href }) => {
-    const isActive = window.location.pathname === href;
+const NavButton = props => {
+    const isActive = window.location.pathname === props.href;
 
     var styleClass = "text-black py-2"
     if (isActive) {
@@ -24,9 +24,9 @@ const NavButton = ({ text, href }) => {
             className='w-min'
                 text
                 style={style}
-                onClick={() => (window.location.href = href)}
+                onClick={() => (window.location.href = props.href)}
             >
-                <p className={styleClass}>{text}</p>
+                <p className={styleClass}>{props.title}</p>
             </CButton>
     );
 };
@@ -53,13 +53,15 @@ export const NavigationHeader = () => {
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
+    const pageButtons = SITE.constants.nav.map(page => <NavButton {...page} />)
+
     return (
         <div className='flex flex-col'>
             <div className="flex mx-5 items-center justify-between py-3">
                 <div className="flex items-center">
                     <a href='/'>
                         <img
-                            src="/assets/images/FiQCI-logo.png"
+                            src={ SITE.constants.logo }
                             alt="Logo"
                             className="h-7"
                         />
@@ -67,12 +69,7 @@ export const NavigationHeader = () => {
                 </div>
                 
                 <div className="lg:flex flex-wrap justify-end hidden">
-                    <NavButton text="Home" href="/" />
-                    <NavButton text="Get started" href="/pages/access" />
-                    <NavButton text="About" href="/pages/about" />
-                    <NavButton text="Blogs and instructions" href="/pages/publications" />
-                    <NavButton text="Status" href="/pages/status" />
-                    <NavButton text="Events" href="/pages/events" />
+                    { pageButtons }
                     <NavSearchButton text="Search" />
                 </div>
                 
@@ -82,12 +79,7 @@ export const NavigationHeader = () => {
             </div>
             {isOpen && 
                 <div className='lg:hidden mx-1.5 mb-10 top-10 w-full flex flex-col justify-center items-left gap-2' >
-                    <NavButton text="Home" href="/" />
-                    <NavButton text="Get started" href="/pages/access" />
-                    <NavButton text="About" href="/pages/about" />
-                    <NavButton text="Blogs and instructions" href="/pages/publications" />
-                    <NavButton text="Status" href="/pages/status" />
-                    <NavButton text="Events" href="/pages/events" />
+                    { pageButtons }
                     <NavSearchButton text="Search" />
                 </div>
             }

@@ -1,5 +1,20 @@
 ---
 ---
+{%- assign values = site.data.site-constants -%}
+
+{%- capture constants -%}
+{
+  "logo": "{{ values.logo | relative_url }}",
+  "nav": [
+    { "title": "Home", "href": "{{ '/' | relative_url }}", "key": 0 },
+    { "title": "Get started", "href": "{{ '/pages/access' | relative_url }}", "key": 1 },
+    { "title": "About", "href": "{{ '/pages/about' | relative_url }}", "key": 2 },
+    { "title": "Blogs and instructions", "href": "{{ '/pages/publications' | relative_url }}", "key": 3 },
+    { "title": "Status", "href": "{{ '/pages/status' | relative_url }}", "key": 4 },
+    { "title": "Events", "href": "{{ '/pages/events' | relative_url }}", "key": 5 }
+  ]
+}
+{%- endcapture -%}
 
 {%- capture blogs -%}
 [
@@ -32,6 +47,7 @@
 {%- endcapture -%}
 
 const SITE = {
+  constants: JSON.parse(String.raw`{{- constants -}}`),
   blogs: JSON.parse(String.raw`{{- blogs -}}`),
   events: JSON.parse(String.raw`{{- events -}}`),
 }
